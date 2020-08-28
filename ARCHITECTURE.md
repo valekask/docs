@@ -1,4 +1,4 @@
-# Architecture best practices:
+# Architecture best practices
 ### 1) Lean Components
 Modern frontend application builds on top of component-based acrhitecture. Application is a collection of components. 
 Each component should be simple and focused on one functionality at a time. For this goal, split components into
@@ -68,29 +68,27 @@ Try to use reactive state management via observable steams in the system. It mak
 It's better to avoid using of ngOnChanges hook to detect value changes. 
 
 ## Q&A
-### Difference between class and interface in Typescript
-https://stackoverflow.com/questions/40973074/difference-between-interfaces-and-classes-in-typescript
+- [Difference between class and interface in Typescript](https://stackoverflow.com/questions/40973074/difference-between-interfaces-and-classes-in-typescript)
 
 Use *Interface* to describe model with properties.
+
 Use *Class* to describe model with properties and behaviour.
 
-### How to detect when an @Input() value changes in Angular?
-https://stackoverflow.com/questions/38571812/how-to-detect-when-an-input-value-changes-in-angular/44686085
 
-### Difference between constructor vs ngOnInit in Angular
-https://stackoverflow.com/questions/35763730/difference-between-constructor-and-ngoninit
+- [How to detect when an @Input() value changes in Angular?](https://stackoverflow.com/questions/38571812/how-to-detect-when-an-input-value-changes-in-angular/44686085)
 
-### How can I select an element in a component template?
-https://stackoverflow.com/questions/32693061/how-can-i-select-an-element-in-a-component-template
+- [Difference between constructor vs ngOnInit in Angular](https://stackoverflow.com/questions/35763730/difference-between-constructor-and-ngoninit)
+
+- [How can I select an element in a component template?](https://stackoverflow.com/questions/32693061/how-can-i-select-an-element-in-a-component-template)
 
 
 ## Style guidelines worth giving a second read
-### Extract non-presentational logic to services
+- Extract non-presentational logic to services
 [Style 05–15: Delegate complex component logic to services](https://angular.io/guide/styleguide#delegate-complex-component-logic-to-services)
 
 It tells us to extract non-presentational logic to services. Next, it tells us to keep components simple and focused on what they’re supposed to do. In other words, we should minimise logic in templates, delegate logic away from component models, keep component small, so no 1,000 lines of code components.
 
-### Don’t put presentation logic in the template
+- *Don’t put presentation logic in the template*
 [Style 05–17: Put presentation logic in the component class](https://angular.io/guide/styleguide#put-presentation-logic-in-the-component-class)
 Templates should worry about declarative DOM manipulation and event binding, not about implementation details.
 
@@ -111,9 +109,9 @@ It tells us about different between root and component level services.
 It tells us to delegate task of data manupulation to a service so that components do not have to know or worry about the details.
 
 ## Resources
-[Lean components](https://indepth.dev/lean-angular-components/)
-[Container components](https://indepth.dev/container-components-with-angular/)
-[Presentational components](https://indepth.dev/presentational-components-with-angular/)
-[Presenters](https://indepth.dev/presenters-with-angular/)
-[The Art of Separation of Concerns](http://aspiringcraftsman.com/2008/01/03/art-of-separation-of-concerns/)
-[Anatomy of a large Angular application](https://medium.com/@krposlek/anatomy-of-a-large-angular-application-f098e5e36994)
+- [Lean components](https://indepth.dev/lean-angular-components/)
+- [Container components](https://indepth.dev/container-components-with-angular/)
+- [Presentational components](https://indepth.dev/presentational-components-with-angular/)
+- [Presenters](https://indepth.dev/presenters-with-angular/)
+- [The Art of Separation of Concerns](http://aspiringcraftsman.com/2008/01/03/art-of-separation-of-concerns/)
+- [Anatomy of a large Angular application](https://medium.com/@krposlek/anatomy-of-a-large-angular-application-f098e5e36994)
