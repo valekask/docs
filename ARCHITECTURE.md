@@ -70,9 +70,9 @@ It's better to avoid using of ngOnChanges hook to detect value changes.
 ## Q&A
 - [Difference between class and interface in Typescript](https://stackoverflow.com/questions/40973074/difference-between-interfaces-and-classes-in-typescript)
 
-Use *Interface* to describe model with properties.
+> Use `Interface` to describe model with properties.
 
-Use *Class* to describe model with properties and behaviour.
+> Use `Class` to describe model with properties and behaviour.
 
 
 - [How to detect when an @Input() value changes in Angular?](https://stackoverflow.com/questions/38571812/how-to-detect-when-an-input-value-changes-in-angular/44686085)
@@ -83,29 +83,40 @@ Use *Class* to describe model with properties and behaviour.
 
 
 ## Style guidelines worth giving a second read
-- Extract non-presentational logic to services
+- **Extract non-presentational logic to services**
+
 [Style 05–15: Delegate complex component logic to services](https://angular.io/guide/styleguide#delegate-complex-component-logic-to-services)
 
 It tells us to extract non-presentational logic to services. Next, it tells us to keep components simple and focused on what they’re supposed to do. In other words, we should minimise logic in templates, delegate logic away from component models, keep component small, so no 1,000 lines of code components.
 
-- *Don’t put presentation logic in the template*
+- **Don’t put presentation logic in the template**
+
 [Style 05–17: Put presentation logic in the component class](https://angular.io/guide/styleguide#put-presentation-logic-in-the-component-class)
+
 Templates should worry about declarative DOM manipulation and event binding, not about implementation details.
 
-### Don’t create a component when a directive will do what you need
+- **Don’t create a component when a directive will do what you need**
+
 [Style 06–01: Use directives to enhance an element](https://angular.io/guide/styleguide#use-directives-to-enhance-an-element)
+
 This guiding principle reminds us that we should not always be jumping to using a component straightaway. In fact, if no template is needed or the DOM changes can be reflected in the host element itself, an attribute directive will do good by us.
 
-### Do one thing and do it well
+- **Do one thing and do it well**
+
 [Style 07–02: Single responsibility](https://angular.io/guide/styleguide#single-responsibility-1)
+
 It recommends us to create services that encapsulate logic from a single horizontal layer at a single abstraction level.
 
-### Component level services
+- **Component level services**
+
 [Style 07–03: Providing a service](https://angular.io/guide/styleguide#providing-a-service)
+
 It tells us about different between root and component level services.
 
-### Extract non-presentational concerns to services
+- **Extract non-presentational concerns to services**
+
 [Style 08–01: Talk to the server through a service](https://angular.io/guide/styleguide#talk-to-the-server-through-a-service)
+
 It tells us to delegate task of data manupulation to a service so that components do not have to know or worry about the details.
 
 ## Resources
