@@ -14,11 +14,14 @@ Present piece of application state that is passed through input properties.
 Delegate user interaction up to the container components via output events.
 Might keep local UI state which is part of UI behaviour.
 
-#### Services
-Keep all business or view related logic.
+#### Component-specific Services
+Keep behaviour logic.
+Encapsulate business logic.
 Transform from data to view model.
-Validate data.
+Validate data and user input.
 Handle application-specific events.
+
+Some architecture guides recommend to use Presenters or Facades to encapsulate complex presentational logic. 
 
 
 ### 2) Layers
@@ -27,90 +30,90 @@ fulfills a meaningful and intuitive role while maximizing its ability to adapt t
 Each layer has it's own scope of responsibility and rules how to commmunicate with other layers.
 
 In our application, we separate functionality into these layers:
-- presentation
-- business logic (containers, component-specific services)
-- state management (store)
-- data access (http services)
+- presentation (presentational components, view models, pipes, directives)
+- business logic (containers, component-specific services, data models)
+- state management (store, actions, selectors)
+- data access (data services)
+- core (authorization, security, sessions, interceptors)
+
+When organizing behavior, the following goals should be sought:
+- eliminate the duplication of functionality
+- restrict the scope of work to a maintainable size
+- restrict the scope of work to the description of the containing boundary
+- restrict the scope of work to the inherent behavior of the containing boundary
+- minimize external dependencies
+- maximize the potential for reuse
+
+Main goals of concerns separation: 
+- separate different concerns and levels of abstraction
+- separate low level implementation details and high level policies
+- easier time changing the details without breaking the component
+
 
 ### 3) Modular design
 Slice the application into feature modules representing different business functionalities.
-Deconstruct system into smaller pieces for better maintainability.
+Deconstruct system into smaller pieces for better maintainability. Use Lazy-loading principe to speed up application loading.
 
 ### 4) Data flow
+A larger Angular application is probably going to feature various states in which it can find itself. 
+Clicking on a toggle can lead to the change of a tab, selection of a product and highlighting of a row in a table, all at the same time. 
+Doing that on the DOM level (like jQuery manipulation) would be a bad idea because you lose the connection between your data and view.
+Manage UI state using data.
+
 Keep unidirectional data flow. Container components take application state and pass it down the component tree to the presentational component.
 Presentational components never modify data locally. If it want to change application state, it has to pass action to the parent component via output events.
 In this way, application state will be predictable and consistent.
 
+Try to use reactive state management via observable steams in the system. It makes data flow simpler and allow to use OnPush strategy to detect changes. 
+It's better to avoid using of ngOnChanges hook to detect value changes. 
+
+## Q&A
+### Difference between class and interface in Typescript
+https://stackoverflow.com/questions/40973074/difference-between-interfaces-and-classes-in-typescript
+
+Use *Interface* to describe model with properties.
+Use *Class* to describe model with properties and behaviour.
+
+### How to detect when an @Input() value changes in Angular?
+https://stackoverflow.com/questions/38571812/how-to-detect-when-an-input-value-changes-in-angular/44686085
+
+### Difference between constructor vs ngOnInit in Angular
+https://stackoverflow.com/questions/35763730/difference-between-constructor-and-ngoninit
+
+### How can I select an element in a component template?
+https://stackoverflow.com/questions/32693061/how-can-i-select-an-element-in-a-component-template
 
 
+## Style guidelines worth giving a second read
+### Extract non-presentational logic to services
+[Style 05–15: Delegate complex component logic to services](https://angular.io/guide/styleguide#delegate-complex-component-logic-to-services)
 
---- OLD
-## Goal
-A goal of software architecture is to separate application concerns, define rules and constraints of the communication between different parts.
-System should be decomposed into layers. Each layer has it's own scope of responsibility and rules how to commmunicate with other layers.
+It tells us to extract non-presentational logic to services. Next, it tells us to keep components simple and focused on what they’re supposed to do. In other words, we should minimise logic in templates, delegate logic away from component models, keep component small, so no 1,000 lines of code components.
 
-Good decomposition allows developer to focus on one functionality at once and to do updates without breaking other parts of the application.
+### Don’t put presentation logic in the template
+[Style 05–17: Put presentation logic in the component class](https://angular.io/guide/styleguide#put-presentation-logic-in-the-component-class)
+Templates should worry about declarative DOM manipulation and event binding, not about implementation details.
 
+### Don’t create a component when a directive will do what you need
+[Style 06–01: Use directives to enhance an element](https://angular.io/guide/styleguide#use-directives-to-enhance-an-element)
+This guiding principle reminds us that we should not always be jumping to using a component straightaway. In fact, if no template is needed or the DOM changes can be reflected in the host element itself, an attribute directive will do good by us.
 
-## Separation of Concerns
-The overall goal of Separation of Concerns is to establish a well organized system where each part 
-fulfills a meaningful and intuitive role while maximizing its ability to adapt to change.
+### Do one thing and do it well
+[Style 07–02: Single responsibility](https://angular.io/guide/styleguide#single-responsibility-1)
+It recommends us to create services that encapsulate logic from a single horizontal layer at a single abstraction level.
 
-We can slice our applications vertically or horizontally. 
-When slicing vertically, we group software artifacts into modules by feature. 
-When slicing horizontally, we group by software layer.
-Each layer should be focused on a single conrern at a time.
-There are following horizontal layers in the application:
+### Component level services
+[Style 07–03: Providing a service](https://angular.io/guide/styleguide#providing-a-service)
+It tells us about different between root and component level services.
 
-Layers:
-- Persistence
-- 
+### Extract non-presentational concerns to services
+[Style 08–01: Talk to the server through a service](https://angular.io/guide/styleguide#talk-to-the-server-through-a-service)
+It tells us to delegate task of data manupulation to a service so that components do not have to know or worry about the details.
 
-Concerns:
-- Persistence
-- State Management
-- Bussiness logic
-- Presentation
-- User interaction
-
-
-In our applications, we can categorise the software artifacts into these horizontal layers, or system concerns.
-
-
-
-
-
-
-### Vertical Separation
-Vertical Separation of Concerns refers to the process of dividing an application into modules of 
-functionality that relate to the same feature or sub-system within an application. 
-Communication between vertical layers is easy and achievable by using standard techniques like sessions, URL parameters, etc.
-Each module internally has horizontal separation. 
-
-### Horizontal Separation
-Horizontal Separation of Concerns refers to the process of dividing an application into logical layers of functionally that fulfill the same role within the application.
-
-That’s where you actually build up your Angular application and place all its building blocks. It’s important to note that each layer (and block inside a layer) only knows about the layer above itself and doesn’t care about layers underneath that are going to consume its exposed functionalities.
-
-
-
-
-
-
-1) What is software architecture and why we need it?
-
-Modern frondend application builds on top of component-based acrhitecture.
-Application is a collection of components. 
-Software architecture is a way of compose components, 
-and define rules and constraints of the communication between those components.
-
-2) Why we need spent time for architecture?
-- Keep sustainable development speed 
-- Easy of adding new features
-
-
-Good architecture should quickly answer to developer following questions:
-- Where do I put this piece of code?
-- Where data come from?
-- How do I modify data?
-- How come this event changed my data and state?
+## Resources
+[Lean components](https://indepth.dev/lean-angular-components/)
+[Container components](https://indepth.dev/container-components-with-angular/)
+[Presentational components](https://indepth.dev/presentational-components-with-angular/)
+[Presenters](https://indepth.dev/presenters-with-angular/)
+[The Art of Separation of Concerns](http://aspiringcraftsman.com/2008/01/03/art-of-separation-of-concerns/)
+[Anatomy of a large Angular application](https://medium.com/@krposlek/anatomy-of-a-large-angular-application-f098e5e36994)
