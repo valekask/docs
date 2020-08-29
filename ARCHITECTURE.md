@@ -1,27 +1,35 @@
 # Architecture best practices
 ### 1) Lean Components
 Modern frontend application builds on top of component-based acrhitecture. Application is a collection of components. 
-Each component should be simple and focused on one functionality at a time. For this goal, split components into
-container and presentational components. Moreover, keep all business logic in component-specific services.
+Each component should be simple and focused on one functionality at a time. Decomple presentation layer from application logic. 
+For this goal, split components into container and presentational components. Moreover, keep all business logic in component-specific services.
+
 
 #### Container components
-Contain all the state needed for the child component. 
-Transform data into a shape that is most convenient for the presentational component. 
-Translate events from the presentational component. 
+- Contain all the state needed for the child component. 
+- Transform data into a shape that is most convenient for the presentational component. 
+- Translate events from the presentational component. 
+- Stateful.
+
 
 #### Presentational components
-Present piece of application state that is passed through input properties. 
-Delegate user interaction up to the container components via output events.
-Might keep local UI state which is part of UI behaviour.
+- Present piece of application state that is passed through input properties. 
+- Delegate user interaction up to the container components via output events.
+- Stateless, but might keep local UI state which is part of UI behaviour.
+- Should not know about state management layer
+
+
 
 #### Component-specific Services
-Keep behaviour logic.
-Encapsulate business logic.
-Transform from data to view model.
-Validate data and user input.
-Handle application-specific events.
+- Keep behaviour logic.
+- Encapsulate business logic.
+- Transform from data to view model.
+- Validate data and user input.
+- Handle application-specific events.
+- Should not know about state management layer.
 
 Some architecture guides recommend to use Presenters or Facades to encapsulate complex presentational logic. 
+I think such approaches more feat for very large apps and might be overcomplicated for medium-size apps. 
 
 
 ### 2) Layers
@@ -52,7 +60,10 @@ Main goals of concerns separation:
 
 ### 3) Modular design
 Slice the application into feature modules representing different business functionalities.
-Deconstruct system into smaller pieces for better maintainability. Use Lazy-loading principe to speed up application loading.
+Deconstruct system into smaller pieces for better maintainability. Use lazy-loading technique to speed up application loading.
+- Use feature-modules to encapsulate every components, directives or pipes related to business area. 
+- Use shared-modules to encapsulate common utility components, directives or pipes.
+- Use core-modules to keep application-wide singleton services.
 
 ### 4) Data flow
 A larger Angular application is probably going to feature various states in which it can find itself. 
