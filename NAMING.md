@@ -7,7 +7,7 @@ Naming is an important part of writing readable, maintainable code. The followin
 ### DO use terms consistently
 Use the same name for the same thing, throughout your code. If a precedent already exists outside your API that users are likely to know, follow that precedent.
 
-Good example :+1:
+_Good example_ :+1:
 ```
 pageCount         // A field.
 updatePageCount() // Consistent with pageCount.
@@ -16,7 +16,7 @@ asSomething()     // Consistent with List's asMap().
 Point             // A familiar concept.
 ```
 
-Bad example :-1:
+_Bad example_ :-1:
 ```
 renumberPages()      // Confusingly different from pageCount.
 convertToSomething() // Inconsistent with toX() precedent.
@@ -29,7 +29,7 @@ The goal is to take advantage of what the user already knows. This includes thei
 ### AVOID abbreviations
 Unless the abbreviation is more common than the unabbreviated term, don’t abbreviate. If you do abbreviate, capitalize it correctly.
 
-Good example :+1:
+_Good example_ :+1:
 ```
 pageCount
 buildRectangles
@@ -37,7 +37,7 @@ IOStream
 HttpRequest
 ```
 
-Bad example :-1:
+_Bad example_ :-1:
 ```
 numPages    // "num" is an abbreviation of number(of)
 buildRects
@@ -49,7 +49,7 @@ HypertextTransferProtocolRequest
 The last word should be the most descriptive of what the thing is. You can prefix it with other words, such as adjectives, to further describe the thing.
 
 
-Good example :+1:
+_Good example_ :+1:
 ```
 pageCount             // A count (of pages).
 ConversionSink        // A sink for doing conversions.
@@ -57,7 +57,7 @@ ChunkedConversionSink // A ConversionSink that's chunked.
 CssFontFaceRule       // A rule for font faces in CSS.
 ```
 
-Bad example :-1:
+_Bad example_ :-1:
 ```
 numPages                  // Not a collection of pages.
 CanvasRenderingContext2D  // Not a "2D".
@@ -151,3 +151,51 @@ showPopup     // Sounds like it shows the popup.
 ```
 
 **Exception**: Input properties in Angular components sometimes use imperative verbs for boolean setters because these setters are invoked in templates, not from other Dart code.
+
+### CONSIDER omitting the verb for a named boolean parameter
+This refines the previous rule. For named parameters that are boolean, the name is often just as clear without the verb, and the code reads better at the call site.
+
+Good example :+1:
+```
+Isolate.spawn(entryPoint, message, paused: false);
+var copy = List.from(elements, growable: true);
+var regExp = RegExp(pattern, caseSensitive: false);
+```
+
+### PREFER the “positive” name for a boolean property or variable
+Most boolean names have conceptually “positive” and “negative” forms where the former feels like the fundamental concept and the latter is its negation—“open” and “closed”, “enabled” and “disabled”, etc. Often the latter name literally has a prefix that negates the former: “visible” and “in-visible”, “connected” and “dis-connected”, “zero” and “non-zero”.
+
+
+When choosing which of the two cases that true represents — and thus which case the property is named for — prefer the positive or more fundamental one. Boolean members are often nested inside logical expressions, including negation operators. If your property itself reads like a negation, it’s harder for the reader to mentally perform the double negation and understand what the code means.
+
+Good example :+1:
+```
+if (socket.isConnected && database.hasData) {
+  socket.write(database.read());
+}
+```
+
+_Bad example_ :-1:
+```
+if (!socket.isDisconnected && !database.isEmpty) {
+  socket.write(database.read());
+}
+```
+
+For some properties, there is no obvious positive form. Is a document that has been flushed to disk “saved” or “un-changed”? Is a document that hasn’t been flushed “un-saved” or “changed”? In ambiguous cases, lean towards the choice that is less likely to be negated by users or has the shorter name.
+
+
+__Exception__: With some properties, the negative form is what users overwhelmingly need to use. Choosing the positive case would force them to negate the property with ! everywhere. Instead, it may be better to use the negative case for that property.
+
+### PREFER an imperative verb phrase for a function or method whose main purpose is a side effect
+Callable members can return a result to the caller and perform other work or side effects. In an imperative language like Dart, members are often called mainly for their side effect: they may change an object’s internal state, produce some output, or talk to the outside world.
+
+
+Those kinds of members should be named using an imperative verb phrase that clarifies the work the member performs.
+Good example :+1:
+```
+list.add("element");
+queue.removeFirst();
+window.refresh();
+```
+This way, an invocation reads like a command to do that work.
