@@ -155,7 +155,7 @@ showPopup     // Sounds like it shows the popup.
 ### CONSIDER omitting the verb for a named boolean parameter
 This refines the previous rule. For named parameters that are boolean, the name is often just as clear without the verb, and the code reads better at the call site.
 
-Good example :+1:
+_Good example_ :+1:
 ```
 Isolate.spawn(entryPoint, message, paused: false);
 var copy = List.from(elements, growable: true);
@@ -168,7 +168,7 @@ Most boolean names have conceptually “positive” and “negative” forms whe
 
 When choosing which of the two cases that true represents — and thus which case the property is named for — prefer the positive or more fundamental one. Boolean members are often nested inside logical expressions, including negation operators. If your property itself reads like a negation, it’s harder for the reader to mentally perform the double negation and understand what the code means.
 
-Good example :+1:
+_Good example_ :+1:
 ```
 if (socket.isConnected && database.hasData) {
   socket.write(database.read());
@@ -193,7 +193,7 @@ Callable members can return a result to the caller and perform other work or sid
 
 Those kinds of members should be named using an imperative verb phrase that clarifies the work the member performs.
 
-Good example :+1:
+_Good example_ :+1:
 ```
 list.add("element");
 queue.removeFirst();
@@ -207,7 +207,7 @@ Other callable members have few side effects but return a useful result to the c
 
 This means the member is syntactically a method, but conceptually it is a property, and should be named as such using a phrase that describes what the member returns.
 
-Good example :+1:
+_Good example_ :+1:
 ```
 var element = list.elementAt(3);
 var first = list.firstWhere(test);
@@ -219,7 +219,7 @@ This guideline is deliberately softer than the previous one. Sometimes a method 
 ### CONSIDER an imperative verb phrase for a function or method if you want to draw attention to the work it performs
 When a member produces a result without any side effects, it should usually be a getter or a method with a noun phrase name describing the result it returns. However, sometimes the work required to produce that result is important. It may be prone to runtime failures, or use heavyweight resources like networking or file I/O. In cases like this, where you want the caller to think about the work the member is doing, give the member a verb phrase name that describes that work.
 
-Good example :+1:
+_Good example_ :+1:
 ```
 var table = database.downloadData();
 var packageVersions = packageGraph.solveConstraints();
@@ -236,3 +236,29 @@ Even if the member does need to be a method because it takes arguments or otherw
 - Simply drop get and use a noun phrase name like `breakfastOrder()` if the caller mostly cares about the value the method returns.
 
 - Use a verb phrase name if the caller cares about the work being done, but pick a verb that more precisely describes the work than get, like create, download, fetch, calculate, request, aggregate, etc.
+
+### PREFER naming a method to___() if it copies the object’s state to a new object
+A conversion method is one that returns a new object containing a copy of almost all of the state of the receiver but usually in some different form or representation. The core libraries have a convention that these methods are named starting with to followed by the kind of result.
+
+
+If you define a conversion method, it’s helpful to follow that convention.
+
+_Good example_ :+1:
+```
+list.toSet();
+stackTrace.toString();
+dateTime.toLocal();
+```
+
+### PREFER naming a method as___() if it returns a different representation backed by the original object
+Conversion methods are “snapshots”. The resulting object has its own copy of the original object’s state. There are other conversion-like methods that return views—they provide a new object, but that object refers back to the original. Later changes to the original object are reflected in the view.
+
+
+The core library convention for you to follow is `as___()`.
+
+_Good example_ :+1:
+```
+var map = table.asMap();
+var list = bytes.asFloat32List();
+var future = subscription.asFuture();
+```
