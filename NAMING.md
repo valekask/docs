@@ -192,6 +192,7 @@ Callable members can return a result to the caller and perform other work or sid
 
 
 Those kinds of members should be named using an imperative verb phrase that clarifies the work the member performs.
+
 Good example :+1:
 ```
 list.add("element");
@@ -199,3 +200,39 @@ queue.removeFirst();
 window.refresh();
 ```
 This way, an invocation reads like a command to do that work.
+
+### PREFER a noun phrase or non-imperative verb phrase for a function or method if returning a value is its primary purpose
+Other callable members have few side effects but return a useful result to the caller. If the member needs no parameters to do that, it should generally be a getter. But, sometimes a logical “property” needs some parameters. For example, elementAt() returns a piece of data from a collection, but it needs a parameter to know which piece of data to return.
+
+
+This means the member is syntactically a method, but conceptually it is a property, and should be named as such using a phrase that describes what the member returns.
+
+Good example :+1:
+```
+var element = list.elementAt(3);
+var first = list.firstWhere(test);
+var char = string.codeUnitAt(4);
+```
+
+This guideline is deliberately softer than the previous one. Sometimes a method has no side effects but is still simpler to name with a verb phrase like `list.take()` or `string.split()`.
+
+### CONSIDER an imperative verb phrase for a function or method if you want to draw attention to the work it performs
+When a member produces a result without any side effects, it should usually be a getter or a method with a noun phrase name describing the result it returns. However, sometimes the work required to produce that result is important. It may be prone to runtime failures, or use heavyweight resources like networking or file I/O. In cases like this, where you want the caller to think about the work the member is doing, give the member a verb phrase name that describes that work.
+
+Good example :+1:
+```
+var table = database.downloadData();
+var packageVersions = packageGraph.solveConstraints();
+```
+
+Note, though, that this guideline is softer than the previous two. The work an operation performs is often an implementation detail that isn’t relevant to the caller, and performance and robustness boundaries change over time. Most of the time, name your members based on what they do for the caller, not how they do it.
+
+### AVOID starting a method name with get
+In most cases, the method should be a getter with get removed from the name. For example, instead of a method named `getBreakfastOrder()`, define a getter named `breakfastOrder`.
+
+
+Even if the member does need to be a method because it takes arguments or otherwise isn’t a good fit for a getter, you should still avoid get. Like the previous guidelines state, either:
+
+- Simply drop get and use a noun phrase name like `breakfastOrder()` if the caller mostly cares about the value the method returns.
+
+- Use a verb phrase name if the caller cares about the work being done, but pick a verb that more precisely describes the work than get, like create, download, fetch, calculate, request, aggregate, etc.
