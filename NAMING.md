@@ -292,7 +292,6 @@ Single letter names aren’t exactly illuminating, but almost all generic types 
 
 `E` for the __element__ type in a collection:
 
-_Good example_ :+1:
 ```
 class IterableBase<E> {}
 class List<E> {}
@@ -303,7 +302,6 @@ class RedBlackTree<E> {}
 
 `K` and `V` for the __key__ and __value__ types in an associative collection:
 
-_Good example_ :+1:
 ```
 class Map<K, V> {}
 class Multimap<K, V> {}
@@ -313,7 +311,6 @@ class MapEntry<K, V> {}
 
 `R` for a type used as the __return__ type of a function or a class’s methods. This isn’t common, but appears in typedefs sometimes and in classes that implement the visitor pattern:
 
-_Good example_ :+1:
 ```
 abstract class ExpressionVisitor<R> {
   R visitBinary(BinaryExpression node);
@@ -325,17 +322,15 @@ abstract class ExpressionVisitor<R> {
 
 Otherwise, use `T`, `S`, and `U` for generics that have a single type parameter and where the surrounding type makes its meaning obvious. There are multiple letters here to allow nesting without shadowing a surrounding name. For example:
 
-_Good example_ :+1:
 ```
 class Future<T> {
   Future<S> then<S>(FutureOr<S> onValue(T value)) => ...
 }
 ```
-Here, the generic method then<S>() uses S to avoid shadowing the T on Future<T>.
+Here, the generic method `then<S>()` uses `S` to avoid shadowing the `T` on `Future<T>`.
 
 
 If none of the above cases are a good fit, then either another single-letter mnemonic name or a descriptive name is fine:
-_Good example_ :+1:
 ```
 class Graph<N, E> {
   final List<N> nodes = [];
