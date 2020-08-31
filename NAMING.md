@@ -4,6 +4,12 @@ Taken from [Effective Dart: Design](https://dart.dev/guides/language/effective-d
 
 Naming is an important part of writing readable, maintainable code. The following best practices can help you achieve that goal.
 
+##### Content:
+- [DO use terms consistently](#do-use-terms-consistently)
+- [AVOID abbreviations](#avoid-abbreviations)
+- [PREFER putting the most descriptive noun last](#prefer-putting-the-most-descriptive-noun-last)
+
+
 ### DO use terms consistently
 Use the same name for the same thing, throughout your code. If a precedent already exists outside your API that users are likely to know, follow that precedent.
 
