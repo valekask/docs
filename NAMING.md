@@ -64,10 +64,10 @@ CanvasRenderingContext2D  // Not a "2D".
 RuleFontFaceCss           // Not a CSS.
 ```
 
-CONSIDER making the code read like a sentence
+### CONSIDER making the code read like a sentence
 When in doubt about naming, write some code that uses your API, and try to read it like a sentence.
 
-Good example :+1:
+_Good example_ :+1:
 ```
 // "If errors is empty..."
 if (errors.isEmpty) ...
@@ -79,7 +79,7 @@ subscription.cancel();
 monsters.where((monster) => monster.hasClaws);
 ```
 
-Bad example :-1:
+_Bad example_ :-1:
 ```
 // Telling errors to empty itself, or asking if it is?
 if (errors.empty) ...
@@ -93,9 +93,24 @@ monsters.filter((monster) => monster.hasClaws);
 
 It’s helpful to try out your API and see how it “reads” when used in code, but you can go too far. It’s not helpful to add articles and other parts of speech to force your names to literally read like a grammatically correct sentence.
 
-Bad example :-1:
+_Bad example_ :-1:
 ```
 if (theCollectionOfErrors.isEmpty) ...
 
 monsters.producesANewSequenceWhereEach((monster) => monster.hasClaws);
 ```
+### PREFER a noun phrase for a non-boolean property or variable
+The reader’s focus is on what the property is. If the user cares more about how a property is determined, then it should probably be a method with a verb phrase name.
+
+_Good example_ :+1:
+```
+list.length
+context.lineWidth
+quest.rampagingSwampBeast
+```
+
+_Bad example_ :-1:
+```
+list.deleteItems
+```
+
