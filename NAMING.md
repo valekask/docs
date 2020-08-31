@@ -114,3 +114,40 @@ _Bad example_ :-1:
 list.deleteItems
 ```
 
+### PREFER a non-imperative verb phrase for a boolean property or variable
+Boolean names are often used as conditions in control flow, so you want a name that reads well there. Compare:
+
+```
+if (window.closeable) ...  // Adjective.
+if (window.canClose) ...   // Verb.
+```
+
+Good names tend to start with one of a few kinds of verbs:
+
+- a form of “to be”: isEnabled, wasShown, willFire. These are, by far, the most common.
+
+- an auxiliary verb: hasElements, canClose, shouldConsume, mustSave.
+
+- an active verb: ignoresInput, wroteFile. These are rare because they are usually ambiguous. loggedResult is a bad name because it could mean “whether or not a result was logged” or “the result that was logged”. Likewise, closingConnection could be “whether the connection is closing” or “the connection that is closing”. Active verbs are allowed when the name can only be read as a predicate.
+
+What separates all these verb phrases from method names is that they are not imperative. A boolean name should never sound like a command to tell the object to do something, because accessing a property doesn’t change the object. (If the property does modify the object in a meaningful way, it should be a method.)
+
+_Good example_ :+1:
+```isEmpty
+hasElements
+canClose
+closesWindow
+canShowPopup
+hasShownPopup
+```
+
+_Bad example_ :-1:
+```empty      // Adjective or verb?
+withElements  // Sounds like it might hold elements.
+closeable     // Sounds like an interface.
+              // "canClose" reads better as a sentence.
+closingWindow // Returns a bool or a window?
+showPopup     // Sounds like it shows the popup.
+```
+
+**Exception**: Input properties in Angular components sometimes use imperative verbs for boolean setters because these setters are invoked in templates, not from other Dart code.
