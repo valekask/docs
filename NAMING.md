@@ -169,7 +169,7 @@ closingWindow // Returns a bool or a window?
 showPopup     // Sounds like it shows the popup.
 ```
 
-**Exception**: Input properties in Angular components sometimes use imperative verbs for boolean setters because these setters are invoked in templates, not from other Dart code.
+**Exception**: Input properties in Angular components sometimes use imperative verbs for boolean setters because these setters are invoked in templates, not from other code.
 
 ### CONSIDER omitting the verb for a named boolean parameter
 This refines the previous rule. For named parameters that are boolean, the name is often just as clear without the verb, and the code reads better at the call site.
@@ -207,7 +207,7 @@ For some properties, there is no obvious positive form. Is a document that has b
 __Exception__: With some properties, the negative form is what users overwhelmingly need to use. Choosing the positive case would force them to negate the property with ! everywhere. Instead, it may be better to use the negative case for that property.
 
 ### PREFER an imperative verb phrase for a function or method whose main purpose is a side effect
-Callable members can return a result to the caller and perform other work or side effects. In an imperative language like Dart, members are often called mainly for their side effect: they may change an object’s internal state, produce some output, or talk to the outside world.
+Callable members can return a result to the caller and perform other work or side effects. In an imperative language like TypeScript, members are often called mainly for their side effect: they may change an object’s internal state, produce some output, or talk to the outside world.
 
 
 Those kinds of members should be named using an imperative verb phrase that clarifies the work the member performs.
