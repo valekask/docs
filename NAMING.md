@@ -8,6 +8,19 @@ Naming is an important part of writing readable, maintainable code. The followin
 - [DO use terms consistently](#do-use-terms-consistently)
 - [AVOID abbreviations](#avoid-abbreviations)
 - [PREFER putting the most descriptive noun last](#prefer-putting-the-most-descriptive-noun-last)
+- [CONSIDER making the code read like a sentence](#consider-making-the-code-read-like-a-sentence)
+- [PREFER a noun phrase for a non-boolean property or variable](#prefer-a-noun-phrase-for-a-non-boolean-property-or-variable)
+- [PREFER a non-imperative verb phrase for a boolean property or variable](#prefer-a-non-imperative-verb-phrase-for-a-boolean-property-or-variable)
+- [CONSIDER omitting the verb for a named boolean parameter](#consider-omitting-the-verb-for-a-named-boolean-parameter)
+- [PREFER the “positive” name for a boolean property or variable](#prefer-the-positive-name-for-a-boolean-property-or-variable)
+- [PREFER an imperative verb phrase for a function or method whose main purpose is a side effect](#prefer-an-imperative-verb-phrase-for-a-function-or-method-whose-main-purpose-is-a-side-effect)
+- [PREFER a noun phrase or non-imperative verb phrase for a function or method if returning a value is its primary purpose](#prefer-a-noun-phrase-or-non-imperative-verb-phrase-for-a-function-or-method-if-returning-a-value-is-its-primary-purpose)
+- [CONSIDER an imperative verb phrase for a function or method if you want to draw attention to the work it performs](#consider-an-imperative-verb-phrase-for-a-function-or-method-if-you-want-to-draw-attention-to-the-work-it-performs)
+- [AVOID starting a method name with get](#avoid-starting-a-method-name-with-get)
+- [PREFER naming a method to___() if it copies the object’s state to a new object](#prefer-naming-a-method-to___-if-it-copies-the-objects-state-to-a-new-object)
+- [PREFER naming a method as___() if it returns a different representation backed by the original object](#prefer-naming-a-method-as___-if-it-returns-a-different-representation-backed-by-the-original-object)
+- [AVOID describing the parameters in the function’s or method’s name](#avoid-describing-the-parameters-in-the-functions-or-methods-name)
+- [DO follow existing mnemonic conventions when naming type parameters](#do-follow-existing-mnemonic-conventions-when-naming-type-parameters)
 
 
 ### DO use terms consistently
