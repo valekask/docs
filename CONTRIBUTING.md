@@ -1,5 +1,5 @@
-# How to contribute to FNA-UI
-This guide describes how to work with branches, commits and pull requests.
+# How to contribute
+This guide describes how to work with branches, commits and pull requests. 
 
 Both for contributors and reviewers, well-established conventions for structure, 
 naming and formatting will save time and hassle caused by improperly created branches, 
