@@ -1,4 +1,4 @@
-## (Architecture best practices)[ARCHITECTURE.md]
+- (Architecture best practices)[ARCHITECTURE.md]
 Describes how to structure and architect large and complex application.
 
 ## (Naming Convention)[ARCHITECTURE.md]
