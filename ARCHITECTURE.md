@@ -69,7 +69,8 @@ Deconstruct system into smaller pieces for better maintainability. Use lazy-load
 A larger Angular application is probably going to feature various states in which it can find itself. 
 Clicking on a toggle can lead to the change of a tab, selection of a product and highlighting of a row in a table, all at the same time. 
 Doing that on the DOM level (like jQuery manipulation) would be a bad idea because you lose the connection between your data and view.
-Manage UI state using data.
+
+Manage UI state using data. Use state management library or pattern whether its a redux-like state container like the NgRx Store or simply plain data services.
 
 Keep unidirectional data flow. Container components take application state and pass it down the component tree to the presentational component.
 Presentational components never modify data locally. If it want to change application state, it has to pass action to the parent component via output events.
