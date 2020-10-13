@@ -1,4 +1,4 @@
-## (Architecture best practices)[https://github.com/valekask/docs/blob/master/ARCHITECTURE.md]
+## [Architecture best practices](ARCHITECTURE.md)
 Describes how to structure and architect large and complex application.
 
 ## (Naming Convention)[https://github.com/valekask/docs/blob/master/NAMING.md]
